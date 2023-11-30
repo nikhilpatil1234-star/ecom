@@ -1,0 +1,141 @@
+<div class="card">
+  <p-toast></p-toast>
+</div>
+<div *ngIf="!showLogin" class="card">
+  <div class="card-header">Sign Up</div>
+  <div class="card-body">
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="form-control"
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+        />
+        <div
+          *ngIf="
+            emailControl?.invalid &&
+            (emailControl?.dirty || emailControl?.touched)
+          "
+          class="error-message"
+        >
+          <div *ngIf="emailControl?.hasError('required')">
+            Email is required.
+          </div>
+          <div *ngIf="emailControl?.hasError('email')">
+            Invalid email format.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-control"
+        />
+        <div
+          *ngIf="
+            passwordControl?.invalid &&
+            (passwordControl?.dirty || passwordControl?.touched)
+          "
+          class="error-message"
+        >
+          <div *ngIf="passwordControl?.hasError('required')">
+            Password is required.
+          </div>
+          <div *ngIf="passwordControl?.hasError('minlength')">
+            Password must be at least 6 characters.
+          </div>
+        </div>
+      </div>
+      <p-button
+        label="signUp"
+        [text]="true"
+        [raised]="true"
+        severity="warning"
+        type="submit"
+        [disabled]="!signupForm.valid"
+      ></p-button>
+      <p-button
+        label="Already have account? signIN"
+        [text]="true"
+        [raised]="true"
+        severity="warning"
+        (onClick)="openLogin()"
+      ></p-button>
+    </form>
+  </div>
+</div>
+<!-- login area -->
+<div *ngIf="showLogin" class="card">
+  <div class="card-header">Sign In</div>
+  <div class="card-body">
+    <form [formGroup]="signInForm" (ngSubmit)="logIn()">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="emailSign"
+          id="emailSign"
+          formControlName="emailSign"
+          class="form-control"
+        />
+        <div
+          *ngIf="
+            emailControl?.invalid &&
+            (emailControl?.dirty || emailControl?.touched)
+          "
+          class="error-message"
+        >
+          <div *ngIf="emailControl?.hasError('required')">
+            Email is required.
+          </div>
+          <div *ngIf="emailControl?.hasError('email')">
+            Invalid email format.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="passwordSign"
+          id="passwordSign"
+          formControlName="passwordSign"
+          class="form-control"
+        />
+        <div
+          *ngIf="
+            passwordControl?.invalid &&
+            (passwordControl?.dirty || passwordControl?.touched)
+          "
+          class="error-message"
+        >
+          <div *ngIf="passwordControl?.hasError('required')">
+            Password is required.
+          </div>
+          <div *ngIf="passwordControl?.hasError('minlength')">
+            Password must be at least 6 characters.
+          </div>
+        </div>
+      </div>
+      <p-button
+        label="signIn"
+        [text]="true"
+        [raised]="true"
+        severity="warning"
+        type="submit"
+      ></p-button>
+    </form>
+  </div>
+</div>
